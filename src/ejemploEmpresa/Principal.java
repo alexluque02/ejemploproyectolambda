@@ -81,6 +81,7 @@ public class Principal {
 				break;
 			case 8:
 				o.mostrarOrdenado();
+				o.mostrar();
 				break;
 			case 9:
 				System.out.println("Diga el Dni del empleado");

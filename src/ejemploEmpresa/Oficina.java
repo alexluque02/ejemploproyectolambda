@@ -49,7 +49,6 @@ public class Oficina {
 	
 	public void mostrarOrdenado() {
 		lista.sort((a, b)->a.getNombre().toLowerCase().compareTo(b.getNombre().toLowerCase()));
-		lista.forEach(System.out::println);
 	}
 	
 	public Double calcularSueldoUnEmpleado(Trabajador t, double sueldoHora) {
@@ -60,7 +59,8 @@ public class Oficina {
 	public Trabajador findByDni(String dni) {
 		return lista.stream()
 				.filter(e->e.getDni().equalsIgnoreCase(dni))
-				.findFirst().get();
+				.findFirst()
+				.get();
 	}
 	
 	public void mostrarEmpleado(Trabajador t) {
@@ -103,5 +103,16 @@ public class Oficina {
 				return encontrado;
 		};
 		return listaMayores.get();
+	}
+	
+	public double calcularMediaSueldo(double sueldoHora) {
+		double suma=0;
+		BiFunction <Double, Double, Double> op = (n, n1) -> {
+			for (Trabajador trabajador : lista) {
+				n+=trabajador.calcularSueldo(n1);
+			}
+			return n/lista.size();
+		};
+		return op.apply(suma, sueldoHora);
 	}
 }
