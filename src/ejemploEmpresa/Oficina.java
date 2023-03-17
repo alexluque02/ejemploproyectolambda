@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Oficina {
 
@@ -62,6 +63,14 @@ public class Oficina {
 				.findFirst().get();
 	}
 	
+	public void mostrarEmpleado(Trabajador t) {
+		if(t!=null){
+			System.out.println(t);
+		}else {
+			System.out.println("No se ha encontrado");
+		}
+	}
+	
 	public boolean comprobarMayoresSesenta(Trabajador t) {
 		Predicate <Trabajador> mayores = a -> a.getEdad()>60;
 		return mayores.test(t);
@@ -69,7 +78,7 @@ public class Oficina {
 	
 	public Trabajador comprobarMayor() {
 		Trabajador t=new Trabajador();
-		Function<Trabajador, Trabajador> tMayor= (mayor) -> {
+		Function<Trabajador, Trabajador> trabajadorMayor= (mayor) -> {
 			int i=0;
 			mayor=lista.get(0);
 			while(i<lista.size()) {
@@ -80,6 +89,19 @@ public class Oficina {
 			}
 			return mayor;
 		};
-		return tMayor.apply(t);
+		return trabajadorMayor.apply(t);
+	}
+	
+	public List<Trabajador> listarMayores (){
+		Supplier <List<Trabajador>> listaMayores = () -> {
+				List <Trabajador> encontrado = new ArrayList <Trabajador> ();
+				for (Trabajador trabajador : lista) {
+					if(trabajador.getEdad()>60) {
+						encontrado.add(trabajador);
+					}
+				}
+				return encontrado;
+		};
+		return listaMayores.get();
 	}
 }

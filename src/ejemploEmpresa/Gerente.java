@@ -19,7 +19,7 @@ public class Gerente extends Trabajador{
 
 	@Override
 	public String toString() {
-		return "Gerente [porcExtra=" + porcExtra + "]";
+		return super.toString()+"Gerente [porcExtra=" + porcExtra + "]";
 	}
 
 	public double calcularSueldo(double sueldoHora) {
